@@ -9,9 +9,21 @@ interface AIReportModalProps {
   dateStr: string;
   justifiedNames: string[];
   permanentNames: string[];
+  sickBrethren: string[];
+  program: string;
+  totalPresent: number;
 }
 
-export const AIReportModal: React.FC<AIReportModalProps> = ({ isOpen, onClose, dateStr, justifiedNames, permanentNames }) => {
+export const AIReportModal: React.FC<AIReportModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  dateStr, 
+  justifiedNames, 
+  permanentNames,
+  sickBrethren,
+  program,
+  totalPresent
+}) => {
   const [report, setReport] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [generated, setGenerated] = useState(false);
@@ -25,7 +37,7 @@ export const AIReportModal: React.FC<AIReportModalProps> = ({ isOpen, onClose, d
 
   const handleGenerate = async () => {
     setLoading(true);
-    const text = await generateFormalSummary(dateStr, justifiedNames, permanentNames);
+    const text = await generateFormalSummary(dateStr, justifiedNames, permanentNames, sickBrethren, program, totalPresent);
     setReport(text);
     setLoading(false);
     setGenerated(true);

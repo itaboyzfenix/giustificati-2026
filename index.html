@@ -2,8 +2,23 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LodgeKeeper - Gestione Giustificati</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>LodgeKeeper - R.L. Giorgio Asproni 1055</title>
+    
+    <!-- iOS / PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LodgeKeeper">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a">
+    
+    <!-- Icone -->
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2544/2544131.png">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2544/2544131.png">
+    
+    <!-- Manifest per PWA -->
+    <link rel="manifest" href="manifest.json">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
@@ -29,23 +44,56 @@
       }
     </script>
     <style>
+      :root {
+        --sat: env(safe-area-inset-top);
+        --sar: env(safe-area-inset-right);
+        --sab: env(safe-area-inset-bottom);
+        --sal: env(safe-area-inset-left);
+      }
+
       body {
         background-color: #0f172a;
         color: #e2e8f0;
+        overscroll-behavior-y: none;
+        -webkit-tap-highlight-color: transparent;
+        /* Impedisce il rimbalzo su iOS per un look più nativo */
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
+
+      #root {
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
-      ::-webkit-scrollbar-track {
-        background: #0f172a; 
+
+      header {
+        padding-top: max(1rem, var(--sat));
       }
-      ::-webkit-scrollbar-thumb {
-        background: #334155; 
-        border-radius: 4px;
+
+      main {
+        padding-bottom: max(6rem, var(--sab));
+        padding-left: max(1rem, var(--sal));
+        padding-right: max(1rem, var(--sar));
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #475569; 
+
+      /* Fix per input su iPhone per evitare zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 10px;
       }
     </style>
   <script type="importmap">
@@ -59,8 +107,10 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>

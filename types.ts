@@ -5,8 +5,14 @@ export interface Member {
   role?: string; // Optional: Maestro, Apprendista, etc.
 }
 
+export interface DayData {
+  justifiedIds: string[];
+  sickBrethren: string[];
+  program: string;
+}
+
 export interface AttendanceRecord {
-  [dateIsoString: string]: string[]; // Array of Member IDs
+  [dateIsoString: string]: DayData;
 }
 
 export interface AppState {
